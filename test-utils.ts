@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import { vi } from "vitest";
+import fs from 'node:fs';
+import { vi } from 'vitest';
 
 function makeAsyncCallbackWithoutValue<T extends unknown[]>() {
   let promiseResolve: (args: T) => void;
@@ -25,9 +25,7 @@ function makeAsyncCallbackWithValue<T>(value: T) {
 export function makeAsyncCallback<T extends unknown[]>(): ReturnType<
   typeof makeAsyncCallbackWithoutValue<T>
 >;
-export function makeAsyncCallback<T>(
-  value?: T
-): ReturnType<typeof makeAsyncCallbackWithValue<T>>;
+export function makeAsyncCallback<T>(value?: T): ReturnType<typeof makeAsyncCallbackWithValue<T>>;
 export function makeAsyncCallback<T>(value?: T) {
   if (value === undefined) {
     return makeAsyncCallbackWithoutValue();
@@ -45,28 +43,28 @@ export function loadPDF(path: string) {
       return new Uint8Array(raw).buffer;
     },
     get blob() {
-      return new Blob([arrayBuffer], { type: "application/pdf" });
+      return new Blob([arrayBuffer], { type: 'application/pdf' });
     },
     get data() {
       return new Uint8Array(raw);
     },
     get dataURI() {
-      return `data:application/pdf;base64,${raw.toString("base64")}`;
+      return `data:application/pdf;base64,${raw.toString('base64')}`;
     },
     get file() {
-      return new File([arrayBuffer], "test.pdf", { type: "application/pdf" });
+      return new File([arrayBuffer], 'test.pdf', { type: 'application/pdf' });
     },
   };
 }
 
 export function muteConsole() {
-  vi.spyOn(global.console, "log").mockImplementation(() => {
+  vi.spyOn(global.console, 'log').mockImplementation(() => {
     // Intentionally empty
   });
-  vi.spyOn(global.console, "error").mockImplementation(() => {
+  vi.spyOn(global.console, 'error').mockImplementation(() => {
     // Intentionally empty
   });
-  vi.spyOn(global.console, "warn").mockImplementation(() => {
+  vi.spyOn(global.console, 'warn').mockImplementation(() => {
     // Intentionally empty
   });
 }
